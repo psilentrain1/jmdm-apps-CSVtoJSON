@@ -1,4 +1,6 @@
 ### TODO
 
-1. [ ] Validate user inputs
+1. [x] Validate user inputs
 1. [ ] Handle conversion errors
+1. [ ] Handle bad inputs more gracefully
+1. [ ] Handle files not found, etc.

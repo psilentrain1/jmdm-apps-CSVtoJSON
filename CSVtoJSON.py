@@ -1,7 +1,7 @@
 import csv
 import json
 
-VERSION_STRING = "0.0.1"
+VERSION_STRING = "0.1.1"
 
 
 def convert(direction, csv_header, from_file, to_file):
@@ -60,27 +60,41 @@ def main():
     from_file = ""
     to_file = ""
 
+    error_invalid = "Invalid input. Please try agian."
+
     print(f"Welcome to CSVtoJSON version {VERSION_STRING}")
     print("Please select the direction you would like to work.")
     print("Enter 1 for CSV to JSON or 2 for JSON to CSV")
     direction = int(input("Direction (1 or 2): "))
 
-    if direction == 1:
-        print("Please enter the file to convert. (ex. convertMe.csv)")
-        from_file = input("File to convert: ")
-        print("Does your .csv file have a header row?")
-        csv_header = int(input("0 = No, 1 = Yes: "))
-        print("Please enter a name for your new JSON file. (ex. convertedFile.json)")
-        to_file = input("Filename: ")
-    elif direction == 2:
-        print("Please enter the file to convert. (ex. convertMe.json)")
-        from_file = input("File to convert: ")
-        print("Please enter a name for your new .csv file. (ex. convertedFile.csv)")
-        to_file = input("Filename: ")
+    match direction:
+        case 1:
+            print("Please enter the file to convert. (ex. convertMe.csv)")
+            from_file = input("File to convert: ")
+            print("Does your .csv file have a header row?")
+            csv_header = int(input("0 = No, 1 = Yes: "))
+            match csv_header:
+                case 0 | 1:
+                    print(
+                        "Please enter a name for your new JSON file. (ex. convertedFile.json)"
+                    )
+                    to_file = input("Filename: ")
+                case _:
+                    print(error_invalid)
+                    return
+        case 2:
+            print("Please enter the file to convert. (ex. convertMe.json)")
+            from_file = input("File to convert: ")
+            print("Please enter a name for your new .csv file. (ex. convertedFile.csv)")
+            to_file = input("Filename: ")
+        case _:
+            print(error_invalid)
+            return
 
     print("Converting...")
     convert(direction, csv_header, from_file, to_file)
     print("Done!")
 
 
-main()
+if __name__ == "__main__":
+    main()
