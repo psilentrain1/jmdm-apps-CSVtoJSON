@@ -1,3 +1,7 @@
+### v0.1.2
+
+1. User input validation is now more graceful
+
 ### v0.1.1
 
 1. Validate user inputs
